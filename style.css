@@ -2,15 +2,34 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Georgia', serif;
-  background: #f8f0f8;
+  background: linear-gradient(to bottom right, #fff0f6, #fdfdfd);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  overflow: hidden;
+  animation: bgFade 2s ease-in;
+}
+
+@keyframes bgFade {
+  from { background-color: #fff; }
+  to { background: linear-gradient(to bottom right, #fff0f6, #fdfdfd); }
 }
 
 .card-container {
-  perspective: 1000px;
+  perspective: 1200px;
+  animation: cardEnter 1.5s ease-out;
+}
+
+@keyframes cardEnter {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .card {
@@ -18,8 +37,18 @@ body {
   height: 450px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1s;
+  transition: transform 1s ease;
   cursor: pointer;
+  animation: shimmerGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes shimmerGlow {
+  from {
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+  }
+  to {
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
+  }
 }
 
 .card:hover {
@@ -33,13 +62,13 @@ body {
   backface-visibility: hidden;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .front img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 16px;
 }
 
 .back {
@@ -51,11 +80,13 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 16px;
 }
 
 .message {
   font-size: 1em;
   color: #444;
+  line-height: 1.6;
 }
 
 .message strong {
