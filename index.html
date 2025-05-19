@@ -9,8 +9,8 @@
 </head>
 <body>
   <div class="card-wrapper">
-    <div class="card-container zoom-in">
-      <div class="card">
+    <div class="card-container zoom-in" id="card-container">
+      <div class="card" id="card">
         <div class="front">
           <img src="cover.png" alt="Save the date" />
         </div>
@@ -34,12 +34,27 @@
   </div>
 
   <script>
-    // After zoom completes, flip card
+    const card = document.getElementById('card');
+    const container = document.getElementById('card-container');
+
+    // Zoom then auto flip
     setTimeout(() => {
-      const container = document.querySelector('.card-container');
       container.classList.remove('zoom-in');
-      document.querySelector('.card').classList.add('flipped');
+      card.classList.add('flipped');
     }, 3000);
+
+    // Toggle flip on click
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+
+    // Flip back on hover (optional smooth experience)
+    card.addEventListener('mouseover', () => {
+      card.classList.remove('flipped');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.add('flipped');
+    });
   </script>
 </body>
 </html>
