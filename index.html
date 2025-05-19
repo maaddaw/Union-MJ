@@ -8,32 +8,36 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="card-container zoom-start">
-    <div class="card">
-      <div class="front">
-        <img src="cover.png" alt="Save the date" />
-      </div>
-      <div class="back">
-        <div class="message">
-          <p class="names">Mahdi & Jihene</p>
-          <hr />
-          <p class="body-text">
-            Nos cœurs débordent d’émotion,<br>
-            et ce moment précieux ne serait complet sans vous.<br><br>
-            Nous serions honorés de vous avoir à nos côtés<br>
-            le <strong>11 juin 2025 à 17h30</strong><br>
-            au <strong>Secret Garden – Dar Bouraoui, Carthage</strong>,<br><br>
-            pour célébrer l’union de nos vies.<br><br>
-            <em>Votre présence est le plus beau des cadeaux.</em>
-          </p>
+  <div class="card-wrapper">
+    <div class="card-container zoom-in">
+      <div class="card">
+        <div class="front">
+          <img src="cover.png" alt="Save the date" />
+        </div>
+        <div class="back">
+          <div class="message">
+            <p class="names">Mahdi & Jihene</p>
+            <hr />
+            <p class="body-text">
+              Nos cœurs débordent d’émotion,<br>
+              et ce moment précieux ne serait complet sans vous.<br><br>
+              Nous serions honorés de vous avoir à nos côtés<br>
+              le <strong>11 juin 2025 à 17h30</strong><br>
+              au <strong>Secret Garden – Dar Bouraoui, Carthage</strong>,<br><br>
+              pour célébrer l’union de nos vies.<br><br>
+              <em>Votre présence est le plus beau des cadeaux.</em>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    // After zoom completes, flip card
     setTimeout(() => {
-      document.querySelector('.card-container').classList.remove('zoom-start');
+      const container = document.querySelector('.card-container');
+      container.classList.remove('zoom-in');
       document.querySelector('.card').classList.add('flipped');
     }, 3000);
   </script>
