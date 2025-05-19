@@ -1,20 +1,37 @@
+/* Elegant background like in your second example */
 body {
   margin: 0;
-  background-color: #fdfcfb;
+  height: 100vh;
+  background: linear-gradient(to top right, #fdfcfb, #e8e8e8);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-family: 'Playfair Display', serif;
+}
+
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-container {
   perspective: 1000px;
+  transform: scale(1);
   transition: transform 3s ease;
 }
 
-.card-container.zoom-start {
-  transform: scale(1.2);
+.card-container.zoom-in {
+  animation: zoomIn 3s forwards;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
 }
 
 .card {
@@ -22,7 +39,7 @@ body {
   height: 520px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1s;
+  transition: transform 1s ease-in-out;
 }
 
 .card.flipped {
