@@ -98,6 +98,44 @@ body {
   width: 60%;
 }
 
+/* Sparkle Effect */
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: sparkleMove 12s linear infinite;
+  z-index: 0;
+}
+
+body::after {
+  background-size: 25px 25px;
+  opacity: 0.6;
+  animation-duration: 18s;
+}
+
+@keyframes sparkleMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 200px;
+  }
+}
+
+/* Keep card on top of sparkles */
+.card-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+
 .message .body-text {
   font-size: 16px;
   line-height: 1.75;
