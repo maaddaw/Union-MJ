@@ -1,30 +1,55 @@
-/* Luxurious soft pink-gold-white background */
+/* Background with blush pink and subtle gold-white tones */
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(to bottom right, #fdf3f3, #fff9f4, #fefefe);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
   font-family: 'Playfair Display', serif;
-}
-
-.card-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
   overflow: hidden;
   position: relative;
 }
 
-.card-container {
-  perspective: 1200px;
+/* Sparkle effect */
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(circle, rgba(255, 215, 250, 0.25) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  animation: sparkleMove 60s linear infinite;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+body::after {
+  background-image: radial-gradient(circle, rgba(255, 245, 230, 0.3) 1px, transparent 1px);
+  animation-direction: reverse;
+  opacity: 0.5;
+}
+
+@keyframes sparkleMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100px, -100px); }
+}
+
+/* Centering wrapper */
+.card-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  z-index: 1;
+  position: relative;
+}
+
+.card-container {
+  perspective: 1500px;
   transition: transform 3s ease;
+  z-index: 2;
 }
 
 .card-container.zoom-in {
@@ -32,12 +57,8 @@ body {
 }
 
 @keyframes zoomIn {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.2);
-  }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.2); }
 }
 
 .card {
@@ -52,33 +73,33 @@ body {
   transform: rotateY(180deg);
 }
 
-.card .front,
-.card .back {
+.front, .back {
   width: 100%;
   height: 100%;
   position: absolute;
   backface-visibility: hidden;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-}
-
-.card .front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.card .back {
-  background: #ffffff;
-  transform: rotateY(180deg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 25px;
 }
 
+.front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.back {
+  transform: rotateY(180deg);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* Message styling */
 .message {
   text-align: center;
   max-width: 290px;
@@ -86,9 +107,9 @@ body {
 
 .message .names {
   font-family: 'Great Vibes', cursive;
-  font-size: 30px;
+  font-size: 32px;
   color: #b48a78;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .message hr {
@@ -98,46 +119,8 @@ body {
   width: 60%;
 }
 
-/* Sparkle Effect */
-body::before,
-body::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
-  background-size: 20px 20px;
-  animation: sparkleMove 12s linear infinite;
-  z-index: 0;
-}
-
-body::after {
-  background-size: 25px 25px;
-  opacity: 0.6;
-  animation-duration: 18s;
-}
-
-@keyframes sparkleMove {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100px 200px;
-  }
-}
-
-/* Keep card on top of sparkles */
-.card-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-
 .message .body-text {
   font-size: 16px;
   line-height: 1.75;
-  color: #444;
+  color: #333;
 }
