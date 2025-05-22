@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahdi & Jihene - Invitation</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
   <style>
     /* Elegant blush background */
     body {
@@ -90,6 +89,7 @@
       justify-content: center;
       box-sizing: border-box;
       padding: 30px;
+      overflow: hidden; /* prevent scroll */
     }
 
     /* Front image */
@@ -105,7 +105,6 @@
       transform: rotateY(180deg);
       text-align: center;
       position: relative;
-      overflow-y: auto;
     }
 
     /* Language toggle button inside back side */
@@ -133,8 +132,13 @@
     .message {
       text-align: center;
       max-width: 290px;
-      margin: 0 auto;
+      margin: 50px auto 0; /* margin-top to avoid overlap with toggle */
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: calc(100% - 50px); /* adjust to avoid scroll */
+      overflow: hidden;
     }
 
     .message .names {
@@ -142,6 +146,7 @@
       font-size: 32px;
       color: #b48a78;
       margin-bottom: 12px;
+      flex-shrink: 0;
     }
 
     .ampersand {
@@ -155,12 +160,16 @@
       border-top: 1px solid #e4cfc1;
       margin: 10px auto 20px;
       width: 60%;
+      flex-shrink: 0;
     }
 
     .message .body-text {
       font-size: 16px;
-      line-height: 1.75;
+      line-height: 1.5;
       color: #333;
+      overflow-wrap: break-word;
+      flex-grow: 1;
+      overflow: hidden;
     }
 
     /* Arabic text direction */
@@ -199,7 +208,7 @@
               ولن يكتمل هذا اللحظة الثمينة بدونكم.<br><br>
               يسعدنا حضوركم ومشاركتكم فرحتنا<br>
               يوم <strong>11 جوان 2025</strong> على الساعة <strong>17:30</strong><br>
-              في <strong>Secret Garden – Dar Bouraoui, قرطاج</strong><br><br>
+              في <strong>Secret Garden – Dar Bourاoui, قرطاج</strong><br><br>
               للاحتفال باتحاد حياتينا.<br><br>
               <em>وجودكم هو أجمل هدية.</em>
             </div>
@@ -212,6 +221,7 @@
   <script>
     const card = document.getElementById('card');
     const container = document.getElementById('card-container');
+    const title = document.querySelector('title');
 
     // Zoom then auto flip after entrance animation
     setTimeout(() => {
@@ -219,7 +229,7 @@
       card.classList.add('flipped');
     }, 5000);
 
-    // Toggle flip on click (ignore click on toggle button)
+    // Toggle flip on click except toggle button
     card.addEventListener('click', (e) => {
       if (!e.target.classList.contains('language-toggle')) {
         card.classList.toggle('flipped');
@@ -234,7 +244,7 @@
       card.classList.add('flipped');
     });
 
-    // Language toggle
+    // Language toggle without flipping card back
     function toggleLanguage() {
       const fr = document.getElementById('french-text');
       const ar = document.getElementById('arabic-text');
@@ -245,11 +255,13 @@
         ar.style.display = 'none';
         button.textContent = 'العربية';
         document.documentElement.lang = 'fr';
+        title.textContent = 'Mahdi & Jihene - Invitation';
       } else {
         fr.style.display = 'none';
         ar.style.display = 'block';
         button.textContent = 'Français';
         document.documentElement.lang = 'ar';
+        title.textContent = 'مهدي وجيهان - دعوة'; // Arabic title
       }
     }
   </script>
