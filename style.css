@@ -1,11 +1,42 @@
-/* Elegant blush background */
-body {
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  height: 100vh;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+/* Body background */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
   font-family: 'Playfair Display', serif;
   overflow: hidden;
   position: relative;
+  flex-direction: column;
+}
+
+/* Language toggle button */
+.language-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: 'Playfair Display', serif;
+  background: #fff7f7;
+  border: 1px solid #e3caca;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Sparkles */
@@ -17,7 +48,7 @@ body::after {
   left: 0;
   width: 200%;
   height: 200%;
-  z-index: -1; /* Background layer */
+  z-index: -1;
   pointer-events: none;
   background-image: radial-gradient(circle, rgba(255, 215, 250, 0.4) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -30,20 +61,19 @@ body::after {
   animation-direction: reverse;
 }
 
-
 @keyframes sparkleMove {
   0% { transform: translate(0, 0); }
   100% { transform: translate(-80px, -80px); }
 }
 
-/* Center container */
+/* Wrapper */
 .card-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   z-index: 1;
-  position: relative;
+  padding: 20px;
 }
 
 .card-container {
@@ -56,9 +86,25 @@ body::after {
   animation: zoomIn 5s forwards;
 }
 
+/* Subtle entrance animation */
+.fade-in-up {
+  animation: fadeInUp 1.8s ease-out;
+}
+
 @keyframes zoomIn {
   0% { transform: scale(1); }
   100% { transform: scale(1.2); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Card flip base */
@@ -91,21 +137,21 @@ body::after {
   justify-content: center;
 }
 
-/* Front image */
 .front img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 14px;
 }
 
-/* Back face — now identical position */
+/* Back face */
 .back {
   transform: rotateY(180deg);
   box-sizing: border-box;
   padding: 30px;
 }
 
-/* Message styling */
+/* Message */
 .message {
   text-align: center;
   max-width: 290px;
@@ -118,6 +164,14 @@ body::after {
   margin-bottom: 12px;
 }
 
+.ampersand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  padding: 0 6px;
+  display: inline-block;
+  transform: translateY(2px);
+}
+
 .message hr {
   border: none;
   border-top: 1px solid #e4cfc1;
@@ -125,7 +179,7 @@ body::after {
   width: 60%;
 }
 
-.message .body-text {
+.body-text {
   font-size: 16px;
   line-height: 1.75;
   color: #333;
