@@ -5,24 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahdi & Jihene - Invitation</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --vh: 1vh; /* fallback */
+    }
+
     body {
       margin: 0;
-      height: 100vh;
+      height: calc(var(--vh, 1vh) * 100);
       background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
       font-family: 'Playfair Display', serif;
-      overflow: hidden;
+      overflow: auto;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      z-index: -1;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 215, 250, 0.4) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: sparkleMove 80s linear infinite;
+      opacity: 0.3;
+    }
+
+    body::after {
+      background-image: radial-gradient(circle, rgba(255, 245, 230, 0.5) 1px, transparent 1px);
+      animation-direction: reverse;
+    }
+
+    @keyframes sparkleMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-80px, -80px); }
+    }
+
     .card-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: calc(var(--vh, 1vh) * 100);
       z-index: 1;
       position: relative;
     }
@@ -173,7 +204,19 @@
       font-family: 'Amiri', serif;
     }
   </style>
+
+  <script>
+    // JavaScript fallback for mobile vh issue
+    function setRealVh() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    window.addEventListener('resize', setRealVh);
+    window.addEventListener('load', setRealVh);
+  </script>
 </head>
+
 <body>
 
   <div class="card-wrapper">
