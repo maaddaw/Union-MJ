@@ -6,14 +6,12 @@
   <title>Mahdi & Jihene - Invitation</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-
   <script>
-    // JavaScript fallback for mobile vh issue
+    // Fix for mobile vh issues
     function setRealVh() {
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
-
     window.addEventListener('resize', setRealVh);
     window.addEventListener('load', setRealVh);
   </script>
