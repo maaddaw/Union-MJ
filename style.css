@@ -1,7 +1,7 @@
 /* Elegant blush background */
 body {
   margin: 0;
-  height: 100vh;
+  height: 100dvh;
   background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
   font-family: 'Playfair Display', serif;
   overflow: hidden;
