@@ -2,17 +2,12 @@
   --vh: 1vh;
 }
 
-html, body {
-  height: 100%;
-  min-height: -webkit-fill-available; /* fix for Android Chrome */
-}
-
 body {
   margin: 0;
-  height: calc(var(--vh, 1vh) * 100);
+  min-height: calc(var(--vh, 1vh) * 100);
   background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
   font-family: 'Playfair Display', serif;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
@@ -49,9 +44,11 @@ body::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100%;
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
   z-index: 1;
-  position: relative;
 }
 
 .card-container {
@@ -85,7 +82,8 @@ body::after {
 
 .card {
   width: 360px;
-  height: 520px;
+  height: 100%;
+  max-height: 520px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 1s ease-in-out;
@@ -126,7 +124,6 @@ body::after {
   transform: rotateY(180deg);
   text-align: center;
   position: relative;
-  overflow-y: auto; /* Allow scroll if needed */
 }
 
 .language-toggle {
@@ -152,14 +149,13 @@ body::after {
 .message {
   text-align: center;
   max-width: 290px;
-  margin: 50px auto 0;
+  margin: 30px auto 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-height: calc(100% - 60px); /* Prevent clipping on small screens */
-  overflow-y: auto;
-  padding-bottom: 20px; /* Prevent last line from being cut */
+  padding-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .names {
@@ -188,12 +184,11 @@ body::after {
 }
 
 .message .body-text {
-  font-size: 16px;
+  font-size: clamp(14px, 2.2vw, 16px);
   line-height: 1.5;
   color: #333;
   overflow-wrap: break-word;
   flex-grow: 1;
-  overflow: visible;
 }
 
 #arabic-text {
