@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahdi & Jihene - Invitation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,7 +16,7 @@
         </div>
         <div class="back">
           <div class="message">
-            <p class="names">Mahdi & Jihene</p>
+            <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
             <hr />
             <p class="body-text">
               Nos cœurs débordent d’émotion,<br>
@@ -41,7 +41,7 @@
     setTimeout(() => {
       container.classList.remove('zoom-in');
       card.classList.add('flipped');
-    }, 3000);
+    }, 5000); // changed from 3000 to 5000
 
     // Toggle flip on click
     card.addEventListener('click', () => {
@@ -58,4 +58,3 @@
   </script>
 </body>
 </html>
-
