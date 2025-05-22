@@ -223,26 +223,19 @@
     const container = document.getElementById('card-container');
     const title = document.querySelector('title');
 
-    // Zoom then auto flip after entrance animation
-    setTimeout(() => {
-      container.classList.remove('zoom-in');
-      card.classList.add('flipped');
-    }, 5000);
+   // Zoom then auto flip after entrance animation
+setTimeout(() => {
+  container.classList.remove('zoom-in');
+  card.classList.add('flipped');
+}, 5000);
 
-    // Toggle flip on click except toggle button
-    card.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('language-toggle')) {
-        card.classList.toggle('flipped');
-      }
-    });
+// Toggle flip on click except when clicking the language toggle button
+card.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('language-toggle')) {
+    card.classList.toggle('flipped');
+  }
+});
 
-    // Flip back on hover
-    card.addEventListener('mouseover', () => {
-      card.classList.remove('flipped');
-    });
-    card.addEventListener('mouseleave', () => {
-      card.classList.add('flipped');
-    });
 
     // Language toggle without flipping card back
     function toggleLanguage() {
