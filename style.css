@@ -2,6 +2,11 @@
   --vh: 1vh;
 }
 
+html, body {
+  height: 100%;
+  min-height: -webkit-fill-available; /* fix for Android Chrome */
+}
+
 body {
   margin: 0;
   height: calc(var(--vh, 1vh) * 100);
@@ -121,6 +126,7 @@ body::after {
   transform: rotateY(180deg);
   text-align: center;
   position: relative;
+  overflow-y: auto; /* Allow scroll if needed */
 }
 
 .language-toggle {
@@ -151,8 +157,9 @@ body::after {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: calc(100% - 50px);
-  overflow: hidden;
+  max-height: calc(100% - 60px); /* Prevent clipping on small screens */
+  overflow-y: auto;
+  padding-bottom: 20px; /* Prevent last line from being cut */
 }
 
 .names {
@@ -186,7 +193,7 @@ body::after {
   color: #333;
   overflow-wrap: break-word;
   flex-grow: 1;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #arabic-text {
