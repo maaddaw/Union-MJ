@@ -10,15 +10,14 @@
     /* Elegant blush background */
     body {
       margin: 0;
-      min-height: 100vh;
+      height: 100vh;
       background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
       font-family: 'Playfair Display', serif;
+      overflow: hidden;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding: 20px; /* ensure some padding on small devices */
     }
 
     /* Card wrapper */
@@ -26,15 +25,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* height: 100vh; removed for better cross-browser */
-      position: relative;
-      width: 100%;
-      max-width: 380px; /* slightly larger max width */
-      perspective: 1500px;
+      height: 100vh;
       z-index: 1;
+      position: relative;
     }
 
-    /* Card */
+    .card-container {
+      perspective: 1500px;
+      z-index: 2;
+    }
+
+    /* Card flip base */
     .card {
       width: 360px;
       height: 520px;
@@ -42,17 +43,16 @@
       transform-style: preserve-3d;
       transition: transform 1s ease-in-out;
       transform-origin: center center;
-      box-sizing: border-box;
     }
 
     .card.flipped {
       transform: rotateY(180deg);
     }
 
-    /* Front & Back shared styles */
+    /* Front & back shared styles */
     .front, .back {
-      width: 360px;
-      height: 520px;
+      width: 100%;
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
@@ -61,11 +61,11 @@
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
       background: white;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      padding: 20px;
+      padding: 30px;
+      flex-direction: column;
     }
 
     /* Front image */
@@ -74,15 +74,14 @@
       height: 100%;
       object-fit: cover;
       border-radius: 14px;
-      display: block;
     }
 
-    /* Back side */
+    /* Back face */
     .back {
       transform: rotateY(180deg);
       text-align: center;
       position: relative;
-      padding-top: 60px; /* space for toggle button */
+      padding-top: 60px; /* space for button */
       overflow-y: auto;
     }
 
@@ -102,16 +101,17 @@
       user-select: none;
       transition: background-color 0.3s ease;
     }
+
     .language-toggle:hover {
       background-color: #f0e6e6;
     }
 
     /* Message styling */
     .message {
-      max-width: 320px;
+      text-align: center;
+      max-width: 290px;
       margin: 0 auto;
       flex: 1;
-      overflow-y: auto;
     }
 
     .message .names {
@@ -138,7 +138,6 @@
       font-size: 16px;
       line-height: 1.75;
       color: #333;
-      white-space: pre-wrap;
     }
 
     /* Arabic text direction */
@@ -146,40 +145,41 @@
       direction: rtl;
       text-align: right;
     }
-
   </style>
 </head>
 <body>
 
   <div class="card-wrapper">
-    <div class="card" id="card">
-      <div class="front">
-        <img src="https://raw.githubusercontent.com/maaddaw/Union-MJ/main/cover.png" alt="Save the date" />
-      </div>
-      <div class="back">
-        <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
+    <div class="card-container" id="card-container">
+      <div class="card" id="card">
+        <div class="front">
+          <img src="https://raw.githubusercontent.com/maaddaw/Union-MJ/main/cover.png" alt="Save the date" />
+        </div>
+        <div class="back">
+          <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
 
-        <div class="message">
-          <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
-          <hr />
-          <div id="french-text" class="body-text lang">
-            Nos cœurs débordent d’émotion,<br>
-            et ce moment précieux ne serait complet sans vous.<br><br>
-            Nous serions honorés de vous avoir à nos côtés<br>
-            le <strong>11 juin 2025 </strong>à<strong> 17h30</strong><br>
-            au <strong>Secret Garden – Dar Bouraoui, Carthage</strong>,<br><br>
-            pour célébrer l’union de nos vies.<br><br>
-            <em>Votre présence est le plus beau des cadeaux.</em>
-          </div>
+          <div class="message">
+            <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
+            <hr />
+            <div id="french-text" class="body-text lang">
+              Nos cœurs débordent d’émotion,<br>
+              et ce moment précieux ne serait complet sans vous.<br><br>
+              Nous serions honorés de vous avoir à nos côtés<br>
+              le <strong>11 juin 2025 </strong>à<strong> 17h30</strong><br>
+              au <strong>Secret Garden – Dar Bouraoui, Carthage</strong>,<br><br>
+              pour célébrer l’union de nos vies.<br><br>
+              <em>Votre présence est le plus beau des cadeaux.</em>
+            </div>
 
-          <div id="arabic-text" class="body-text lang" style="display: none;">
-            قلوبنا تغمرها المشاعر،<br>
-            ولن يكتمل هذا اللحظة الثمينة بدونكم.<br><br>
-            يسعدنا حضوركم ومشاركتكم فرحتنا<br>
-            يوم <strong>11 جوان 2025</strong> على الساعة <strong>17:30</strong><br>
-            في <strong>Secret Garden – Dar Bouraoui, قرطاج</strong><br><br>
-            للاحتفال باتحاد حياتينا.<br><br>
-            <em>وجودكم هو أجمل هدية.</em>
+            <div id="arabic-text" class="body-text lang" style="display: none;">
+              قلوبنا تغمرها المشاعر،<br>
+              ولن يكتمل هذا اللحظة الثمينة بدونكم.<br><br>
+              يسعدنا حضوركم ومشاركتكم فرحتنا<br>
+              يوم <strong>11 جوان 2025</strong> على الساعة <strong>17:30</strong><br>
+              في <strong>Secret Garden – Dar Bouraoui, قرطاج</strong><br><br>
+              للاحتفال باتحاد حياتينا.<br><br>
+              <em>وجودكم هو أجمل هدية.</em>
+            </div>
           </div>
         </div>
       </div>
@@ -188,12 +188,27 @@
 
   <script>
     const card = document.getElementById('card');
+    const container = document.getElementById('card-container');
 
-    // Toggle flip on click anywhere on the card except the toggle button
+    // Zoom then auto flip
+    setTimeout(() => {
+      container.classList.remove('zoom-in');
+      card.classList.add('flipped');
+    }, 5000);
+
+    // Toggle flip on click
     card.addEventListener('click', (e) => {
       if (!e.target.classList.contains('language-toggle')) {
         card.classList.toggle('flipped');
       }
+    });
+
+    // Flip back on hover
+    card.addEventListener('mouseover', () => {
+      card.classList.remove('flipped');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.add('flipped');
     });
 
     // Language toggle
