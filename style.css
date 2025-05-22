@@ -1,27 +1,14 @@
-/* Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-}
-
-/* Body background */
+/* Elegant blush background */
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0;
+  height: 100vh;
   background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
   font-family: 'Playfair Display', serif;
   overflow: hidden;
   position: relative;
-  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Language toggle button */
@@ -29,14 +16,14 @@ body {
   position: absolute;
   top: 20px;
   right: 20px;
-  font-family: 'Playfair Display', serif;
-  background: #fff7f7;
-  border: 1px solid #e3caca;
-  padding: 6px 14px;
-  border-radius: 10px;
-  cursor: pointer;
+  background: white;
+  border: none;
+  padding: 8px 14px;
   font-size: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
 /* Sparkles */
@@ -66,19 +53,18 @@ body::after {
   100% { transform: translate(-80px, -80px); }
 }
 
-/* Wrapper */
+/* Card wrapper */
 .card-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   z-index: 1;
-  padding: 20px;
+  position: relative;
 }
 
 .card-container {
   perspective: 1500px;
-  transition: transform 3s ease;
   z-index: 2;
 }
 
@@ -86,22 +72,22 @@ body::after {
   animation: zoomIn 5s forwards;
 }
 
-/* Subtle entrance animation */
-.fade-in-up {
-  animation: fadeInUp 1.8s ease-out;
-}
-
 @keyframes zoomIn {
   0% { transform: scale(1); }
   100% { transform: scale(1.2); }
 }
 
+/* Entrance fade */
+.fade-in-up {
+  animation: fadeInUp 1.5s ease-out both;
+}
+
 @keyframes fadeInUp {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
@@ -137,11 +123,11 @@ body::after {
   justify-content: center;
 }
 
+/* Front image */
 .front img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 14px;
 }
 
 /* Back face */
@@ -151,7 +137,7 @@ body::after {
   padding: 30px;
 }
 
-/* Message */
+/* Message styling */
 .message {
   text-align: center;
   max-width: 290px;
@@ -167,9 +153,7 @@ body::after {
 .ampersand {
   font-family: 'Cormorant Garamond', serif;
   font-size: 36px;
-  padding: 0 6px;
-  display: inline-block;
-  transform: translateY(2px);
+  margin: 0 8px;
 }
 
 .message hr {
@@ -179,7 +163,7 @@ body::after {
   width: 60%;
 }
 
-.body-text {
+.message .body-text {
   font-size: 16px;
   line-height: 1.75;
   color: #333;
