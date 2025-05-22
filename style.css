@@ -53,7 +53,7 @@ body::after {
 }
 
 .card-container.zoom-in {
-  animation: zoomIn 3s forwards;
+  animation: zoomIn 5s forwards;
 }
 
 @keyframes zoomIn {
