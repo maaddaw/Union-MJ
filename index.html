@@ -5,45 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahdi & Jihene - Invitation</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <style>
     /* Elegant blush background */
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
       font-family: 'Playfair Display', serif;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-    }
-
-    /* Sparkles */
-    body::before,
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      z-index: -1;
-      pointer-events: none;
-      background-image: radial-gradient(circle, rgba(255, 215, 250, 0.4) 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: sparkleMove 80s linear infinite;
-      opacity: 0.3;
-    }
-
-    body::after {
-      background-image: radial-gradient(circle, rgba(255, 245, 230, 0.5) 1px, transparent 1px);
-      animation-direction: reverse;
-    }
-
-    @keyframes sparkleMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-80px, -80px); }
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 20px; /* ensure some padding on small devices */
     }
 
     /* Card wrapper */
@@ -51,30 +26,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      width: 100vw;
+      /* height: 100vh; removed for better cross-browser */
       position: relative;
+      width: 100%;
+      max-width: 380px; /* slightly larger max width */
+      perspective: 1500px;
       z-index: 1;
     }
 
-    .card-container {
-      perspective: 1500px;
-      z-index: 2;
-      /* Zoom in animation */
-      animation: zoomIn 5s forwards;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 360px;  /* match card width */
-      height: 520px; /* match card height */
-    }
-
-    @keyframes zoomIn {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.2); }
-    }
-
-    /* Card flip base */
+    /* Card */
     .card {
       width: 360px;
       height: 520px;
@@ -82,13 +42,14 @@
       transform-style: preserve-3d;
       transition: transform 1s ease-in-out;
       transform-origin: center center;
+      box-sizing: border-box;
     }
 
     .card.flipped {
       transform: rotateY(180deg);
     }
 
-    /* Front & back shared styles */
+    /* Front & Back shared styles */
     .front, .back {
       width: 360px;
       height: 520px;
@@ -103,8 +64,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0;
       box-sizing: border-box;
+      padding: 20px;
     }
 
     /* Front image */
@@ -113,25 +74,44 @@
       height: 100%;
       object-fit: cover;
       border-radius: 14px;
+      display: block;
     }
 
-    /* Back face */
+    /* Back side */
     .back {
       transform: rotateY(180deg);
-      padding: 30px;
-      box-sizing: border-box;
+      text-align: center;
       position: relative;
+      padding-top: 60px; /* space for toggle button */
+      overflow-y: auto;
+    }
+
+    /* Language toggle button inside back side */
+    .language-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .language-toggle:hover {
+      background-color: #f0e6e6;
     }
 
     /* Message styling */
     .message {
-      text-align: center;
-      max-width: 290px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-bottom: 10px; /* space before button */
+      max-width: 320px;
+      margin: 0 auto;
+      flex: 1;
+      overflow-y: auto;
     }
 
     .message .names {
@@ -158,56 +138,49 @@
       font-size: 16px;
       line-height: 1.75;
       color: #333;
+      white-space: pre-wrap;
     }
 
-    /* Language toggle button - moved inside back card */
-    .language-toggle {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: white;
-      border: none;
-      padding: 8px 14px;
-      font-size: 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      z-index: 10;
+    /* Arabic text direction */
+    #arabic-text {
+      direction: rtl;
+      text-align: right;
     }
+
   </style>
 </head>
 <body>
-  <div class="card-wrapper">
-    <div class="card-container zoom-in" id="card-container">
-      <div class="card" id="card">
-        <div class="front">
-          <img src="cover.png" alt="Save the date" />
-        </div>
-        <div class="back">
-          <div class="message">
-            <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
-            <hr />
-            <div id="french-text" class="body-text lang" style="display: block;">
-              Nos cœurs débordent d’émotion,<br />
-              et ce moment précieux ne serait complet sans vous.<br /><br />
-              Nous serions honorés de vous avoir à nos côtés<br />
-              le <strong>11 juin 2025 </strong>à<strong> 17h30</strong><br />
-              au <strong>Secret Garden – Dar Bouraoui, Carthage</strong>,<br /><br />
-              pour célébrer l’union de nos vies.<br /><br />
-              <em>Votre présence est le plus beau des cadeaux.</em>
-            </div>
 
-            <div id="arabic-text" class="body-text lang" style="display: none; direction: rtl; text-align: right;">
-              قلوبنا تغمرها المشاعر،<br />
-              ولن يكتمل هذا اللحظة الثمينة بدونكم.<br /><br />
-              يسعدنا حضوركم ومشاركتكم فرحتنا<br />
-              يوم <strong>11 جوان 2025</strong> على الساعة <strong>17:30</strong><br />
-              في <strong>Secret Garden – Dar Bouraoui, قرطاج</strong><br /><br />
-              للاحتفال باتحاد حياتينا.<br /><br />
-              <em>وجودكم هو أجمل هدية.</em>
-            </div>
+  <div class="card-wrapper">
+    <div class="card" id="card">
+      <div class="front">
+        <img src="https://raw.githubusercontent.com/maaddaw/Union-MJ/main/cover.png" alt="Save the date" />
+      </div>
+      <div class="back">
+        <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
+
+        <div class="message">
+          <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
+          <hr />
+          <div id="french-text" class="body-text lang">
+            Nos cœurs débordent d’émotion,<br>
+            et ce moment précieux ne serait complet sans vous.<br><br>
+            Nous serions honorés de vous avoir à nos côtés<br>
+            le <strong>11 juin 2025 </strong>à<strong> 17h30</strong><br>
+            au <strong>Secret Garden – Dar Bouraoui, Carthage</strong>,<br><br>
+            pour célébrer l’union de nos vies.<br><br>
+            <em>Votre présence est le plus beau des cadeaux.</em>
           </div>
-          <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
+
+          <div id="arabic-text" class="body-text lang" style="display: none;">
+            قلوبنا تغمرها المشاعر،<br>
+            ولن يكتمل هذا اللحظة الثمينة بدونكم.<br><br>
+            يسعدنا حضوركم ومشاركتكم فرحتنا<br>
+            يوم <strong>11 جوان 2025</strong> على الساعة <strong>17:30</strong><br>
+            في <strong>Secret Garden – Dar Bouraoui, قرطاج</strong><br><br>
+            للاحتفال باتحاد حياتينا.<br><br>
+            <em>وجودكم هو أجمل هدية.</em>
+          </div>
         </div>
       </div>
     </div>
@@ -215,36 +188,21 @@
 
   <script>
     const card = document.getElementById('card');
-    const container = document.getElementById('card-container');
 
-    // Zoom then auto flip
-    setTimeout(() => {
-      container.classList.remove('zoom-in');
-      card.classList.add('flipped');
-    }, 5000);
-
-    // Toggle flip on click
-    card.addEventListener('click', () => {
-      card.classList.toggle('flipped');
+    // Toggle flip on click anywhere on the card except the toggle button
+    card.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('language-toggle')) {
+        card.classList.toggle('flipped');
+      }
     });
 
-    // Flip back on hover
-    card.addEventListener('mouseover', () => {
-      card.classList.remove('flipped');
-    });
-    card.addEventListener('mouseleave', () => {
-      card.classList.add('flipped');
-    });
-
-    // Language toggle using getComputedStyle
+    // Language toggle
     function toggleLanguage() {
       const fr = document.getElementById('french-text');
       const ar = document.getElementById('arabic-text');
       const button = document.querySelector('.language-toggle');
 
-      const frDisplay = window.getComputedStyle(fr).display;
-
-      if (frDisplay === 'none') {
+      if (fr.style.display === 'none') {
         fr.style.display = 'block';
         ar.style.display = 'none';
         button.textContent = 'العربية';
