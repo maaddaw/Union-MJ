@@ -1,32 +1,19 @@
-/* Elegant blush background */
+:root {
+  --vh: 1vh;
+}
+
 body {
   margin: 0;
-  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
   background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
   font-family: 'Playfair Display', serif;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Language toggle button */
-.language-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: white;
-  border: none;
-  padding: 8px 14px;
-  font-size: 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-/* Sparkles */
 body::before,
 body::after {
   content: '';
@@ -53,12 +40,11 @@ body::after {
   100% { transform: translate(-80px, -80px); }
 }
 
-/* Card wrapper */
 .card-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   z-index: 1;
   position: relative;
 }
@@ -72,14 +58,13 @@ body::after {
   animation: zoomIn 5s forwards;
 }
 
+.fade-in-up {
+  animation: fadeInUp 1.5s ease-out both;
+}
+
 @keyframes zoomIn {
   0% { transform: scale(1); }
   100% { transform: scale(1.2); }
-}
-
-/* Entrance fade */
-.fade-in-up {
-  animation: fadeInUp 1.5s ease-out both;
 }
 
 @keyframes fadeInUp {
@@ -93,7 +78,6 @@ body::after {
   }
 }
 
-/* Card flip base */
 .card {
   width: 360px;
   height: 520px;
@@ -107,7 +91,6 @@ body::after {
   transform: rotateY(180deg);
 }
 
-/* Front & back shared styles */
 .front, .back {
   width: 100%;
   height: 100%;
@@ -119,35 +102,68 @@ body::after {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   background: white;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  padding: 30px;
+  overflow: hidden;
 }
 
-/* Front image */
 .front img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 14px;
 }
 
-/* Back face */
 .back {
   transform: rotateY(180deg);
-  box-sizing: border-box;
-  padding: 30px;
+  text-align: center;
+  position: relative;
 }
 
-/* Message styling */
+.language-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.language-toggle:hover {
+  background-color: #f0e6e6;
+}
+
 .message {
   text-align: center;
   max-width: 290px;
+  margin: 50px auto 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100% - 50px);
+  overflow: hidden;
 }
 
-.message .names {
-  font-family: 'Great Vibes', cursive;
+.names {
   font-size: 32px;
   color: #b48a78;
   margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+#name-mahdi, #name-jihene {
+  font-family: 'Great Vibes', cursive;
 }
 
 .ampersand {
@@ -161,10 +177,20 @@ body::after {
   border-top: 1px solid #e4cfc1;
   margin: 10px auto 20px;
   width: 60%;
+  flex-shrink: 0;
 }
 
 .message .body-text {
   font-size: 16px;
-  line-height: 1.75;
+  line-height: 1.5;
   color: #333;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+#arabic-text {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Amiri', serif;
 }
