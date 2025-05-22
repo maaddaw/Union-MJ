@@ -5,13 +5,180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahdi & Jihene - Invitation</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Elegant blush background */
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
+      font-family: 'Playfair Display', serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Sparkles */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      z-index: -1;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 215, 250, 0.4) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: sparkleMove 80s linear infinite;
+      opacity: 0.3;
+    }
+
+    body::after {
+      background-image: radial-gradient(circle, rgba(255, 245, 230, 0.5) 1px, transparent 1px);
+      animation-direction: reverse;
+    }
+
+    @keyframes sparkleMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-80px, -80px); }
+    }
+
+    /* Card wrapper */
+    .card-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-container {
+      perspective: 1500px;
+      z-index: 2;
+      /* Zoom in animation */
+      animation: zoomIn 5s forwards;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 360px;  /* match card width */
+      height: 520px; /* match card height */
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+
+    /* Card flip base */
+    .card {
+      width: 360px;
+      height: 520px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+      transform-origin: center center;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    /* Front & back shared styles */
+    .front, .back {
+      width: 360px;
+      height: 520px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      background: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Front image */
+    .front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    /* Back face */
+    .back {
+      transform: rotateY(180deg);
+      padding: 30px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Message styling */
+    .message {
+      text-align: center;
+      max-width: 290px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 10px; /* space before button */
+    }
+
+    .message .names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 32px;
+      color: #b48a78;
+      margin-bottom: 12px;
+    }
+
+    .ampersand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      margin: 0 8px;
+    }
+
+    .message hr {
+      border: none;
+      border-top: 1px solid #e4cfc1;
+      margin: 10px auto 20px;
+      width: 60%;
+    }
+
+    .message .body-text {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #333;
+    }
+
+    /* Language toggle button - moved inside back card */
+    .language-toggle {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+  </style>
 </head>
 <body>
-  <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
-
   <div class="card-wrapper">
-    <div class="card-container zoom-in fade-in-up" id="card-container">
+    <div class="card-container zoom-in" id="card-container">
       <div class="card" id="card">
         <div class="front">
           <img src="cover.png" alt="Save the date" />
@@ -40,6 +207,7 @@
               <em>وجودكم هو أجمل هدية.</em>
             </div>
           </div>
+          <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
         </div>
       </div>
     </div>
