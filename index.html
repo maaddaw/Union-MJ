@@ -233,52 +233,48 @@
     </div>
   </div>
 
-  <script>
-    // Set --vh dynamically for mobile support
-    function setVhUnit() {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+ <script>
+  function setVhUnit() {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+  }
+  setVhUnit();
+  window.addEventListener('resize', setVhUnit);
+
+  const container = document.getElementById('card-container');
+  const card = document.getElementById('card');
+
+  // Automatically flip after 5s
+  setTimeout(() => {
+    container.classList.remove('zoom-in');
+    card.classList.add('flipped');
+  }, 5000);
+
+  // Flip on click (toggle)
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+
+  function toggleLanguage() {
+    const fr = document.getElementById('french-text');
+    const ar = document.getElementById('arabic-text');
+    const arNames = document.getElementById('arabic-names');
+    const button = document.querySelector('.language-toggle');
+
+    if (fr.style.display === 'none') {
+      fr.style.display = 'block';
+      ar.style.display = 'none';
+      arNames.style.display = 'none';
+      button.textContent = 'العربية';
+      document.documentElement.lang = 'fr';
+    } else {
+      fr.style.display = 'none';
+      ar.style.display = 'block';
+      arNames.style.display = 'block';
+      button.textContent = 'Français';
+      document.documentElement.lang = 'ar';
     }
-    setVhUnit();
-    window.addEventListener('resize', setVhUnit);
+  }
+</script>
 
-    // Flip logic
-    const container = document.getElementById('card-container');
-    const card = document.getElementById('card');
-
-    setTimeout(() => {
-      container.classList.remove('zoom-in');
-      card.classList.add('flipped');
-    }, 5000);
-
-    card.addEventListener('click', () => {
-      card.classList.toggle('flipped');
-    });
-
-    card.addEventListener('mouseover', () => {
-      card.classList.remove('flipped');
-    });
-    card.addEventListener('mouseleave', () => {
-      card.classList.add('flipped');
-    });
-
-    // Language toggle
-    function toggleLanguage() {
-      const fr = document.getElementById('french-text');
-      const ar = document.getElementById('arabic-text');
-      const button = document.querySelector('.language-toggle');
-
-      if (fr.style.display === 'none') {
-        fr.style.display = 'block';
-        ar.style.display = 'none';
-        button.textContent = 'العربية';
-        document.documentElement.lang = 'fr';
-      } else {
-        fr.style.display = 'none';
-        ar.style.display = 'block';
-        button.textContent = 'Français';
-        document.documentElement.lang = 'ar';
-      }
-    }
-  </script>
 </body>
 </html>
