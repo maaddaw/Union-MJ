@@ -4,34 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahdi & Jihene - Invitation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-
-  <script>
-    function setRealVh() {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    window.addEventListener('load', setRealVh);
-    window.addEventListener('resize', setRealVh);
-  </script>
 </head>
-
 <body>
   <div class="card-wrapper">
     <div class="card-container zoom-in fade-in-up" id="card-container">
       <div class="card" id="card">
         <div class="front">
-          <img src="https://raw.githubusercontent.com/maaddaw/Union-MJ/main/cover.png" alt="Save the date" />
+          <img src="cover.png" alt="Save the date" />
         </div>
         <div class="back">
           <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
           <div class="message">
-            <p class="names" id="names">
-              <span id="name-mahdi">Mahdi</span>
-              <span class="ampersand" id="ampersand">&</span>
-              <span id="name-jihene">Jihene</span>
-            </p>
+            <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
             <hr />
             <div id="french-text" class="body-text lang">
               Nos cœurs débordent d’émotion,<br>
@@ -43,13 +29,13 @@
               <em>Votre présence est le plus beau des cadeaux.</em>
             </div>
 
-            <div id="arabic-text" class="body-text lang" style="display: none;">
+            <div id="arabic-text" class="body-text lang" style="display: none; direction: rtl; text-align: right;">
               قلوبنا تغمرها المشاعر،<br>
-              ولن تكتمل هذا اللحظة الثمينة بدونكم.<br><br>
+              ولن يكتمل هذا اللحظة الثمينة بدونكم.<br><br>
               يسعدنا حضوركم ومشاركتكم فرحتنا<br>
               يوم <strong>11 جوان 2025</strong> على الساعة <strong>17:30</strong><br>
-              في <strong>Secret Garden – Dar Bouroui, قرطاج.</strong><br><br>
-              للاحتفال بزواجنا.<br><br>
+              في <strong>Secret Garden – Dar Bouraoui, قرطاج</strong><br><br>
+              للاحتفال باتحاد حياتينا.<br><br>
               <em>وجودكم هو أجمل هدية.</em>
             </div>
           </div>
@@ -61,7 +47,6 @@
   <script>
     const card = document.getElementById('card');
     const container = document.getElementById('card-container');
-    const title = document.querySelector('title');
 
     setTimeout(() => {
       container.classList.remove('zoom-in');
@@ -78,32 +63,17 @@
       const fr = document.getElementById('french-text');
       const ar = document.getElementById('arabic-text');
       const button = document.querySelector('.language-toggle');
-      const nameMahdi = document.getElementById('name-mahdi');
-      const nameJihene = document.getElementById('name-jihene');
-      const ampersand = document.getElementById('ampersand');
 
       if (fr.style.display === 'none') {
         fr.style.display = 'block';
         ar.style.display = 'none';
         button.textContent = 'العربية';
         document.documentElement.lang = 'fr';
-        title.textContent = 'Mahdi & Jihene - Invitation';
-        nameMahdi.textContent = 'Mahdi';
-        nameJihene.textContent = 'Jihene';
-        ampersand.textContent = '&';
-        nameMahdi.style.fontFamily = "'Great Vibes', cursive";
-        nameJihene.style.fontFamily = "'Great Vibes', cursive";
       } else {
         fr.style.display = 'none';
         ar.style.display = 'block';
         button.textContent = 'Français';
         document.documentElement.lang = 'ar';
-        title.textContent = 'مهدي وجيهان - دعوة';
-        nameMahdi.textContent = 'مهدي';
-        nameJihene.textContent = 'جيهان';
-        ampersand.textContent = 'و';
-        nameMahdi.style.fontFamily = "'Amiri', serif";
-        nameJihene.style.fontFamily = "'Amiri', serif";
       }
     }
   </script>
