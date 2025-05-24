@@ -83,8 +83,8 @@ body::after {
 }
 
 .card {
-  width: 360px;
-  height: 100vh; /* fallback */
+  width: 90vw;          /* 90% of viewport width */
+  max-width: 360px;     /* but no wider than 360px */
   height: calc(var(--vh, 1vh) * 100);
   max-height: 520px;
   position: relative;
