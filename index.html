@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahdi & Jihene - Invitation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&family=Amiri&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&family=Amiri&family=Lateef&display=swap" rel="stylesheet">
   <style>
     :root {
       --vh: 1vh;
@@ -168,6 +168,12 @@
       margin-bottom: 12px;
     }
 
+    #arabic-names {
+      font-family: 'Lateef', 'Amiri', serif;
+      direction: rtl;
+      display: none;
+    }
+
     .ampersand {
       font-family: 'Cormorant Garamond', serif;
       font-size: 36px;
@@ -206,7 +212,11 @@
         </div>
         <div class="back">
           <div class="message">
-            <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
+            <!-- French Names -->
+            <p class="names" id="latin-names">Mahdi <span class="ampersand">&</span> Jihene</p>
+            <!-- Arabic Names -->
+            <p class="names" id="arabic-names">مهدي <span class="ampersand">&</span> جيهان</p>
+
             <hr />
             <div id="french-text" class="body-text lang">
               Nos cœurs débordent d’émotion,<br>
@@ -233,48 +243,48 @@
     </div>
   </div>
 
- <script>
-  function setVhUnit() {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-  }
-  setVhUnit();
-  window.addEventListener('resize', setVhUnit);
-
-  const container = document.getElementById('card-container');
-  const card = document.getElementById('card');
-
-  // Automatically flip after 5s
-  setTimeout(() => {
-    container.classList.remove('zoom-in');
-    card.classList.add('flipped');
-  }, 5000);
-
-  // Flip on click (toggle)
-  card.addEventListener('click', () => {
-    card.classList.toggle('flipped');
-  });
-
-  function toggleLanguage() {
-    const fr = document.getElementById('french-text');
-    const ar = document.getElementById('arabic-text');
-    const arNames = document.getElementById('arabic-names');
-    const button = document.querySelector('.language-toggle');
-
-    if (fr.style.display === 'none') {
-      fr.style.display = 'block';
-      ar.style.display = 'none';
-      arNames.style.display = 'none';
-      button.textContent = 'العربية';
-      document.documentElement.lang = 'fr';
-    } else {
-      fr.style.display = 'none';
-      ar.style.display = 'block';
-      arNames.style.display = 'block';
-      button.textContent = 'Français';
-      document.documentElement.lang = 'ar';
+  <script>
+    function setVhUnit() {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     }
-  }
-</script>
+    setVhUnit();
+    window.addEventListener('resize', setVhUnit);
 
+    const container = document.getElementById('card-container');
+    const card = document.getElementById('card');
+
+    setTimeout(() => {
+      container.classList.remove('zoom-in');
+      card.classList.add('flipped');
+    }, 5000);
+
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+
+    function toggleLanguage() {
+      const fr = document.getElementById('french-text');
+      const ar = document.getElementById('arabic-text');
+      const arNames = document.getElementById('arabic-names');
+      const enNames = document.getElementById('latin-names');
+      const button = document.querySelector('.language-toggle');
+
+      if (fr.style.display === 'none') {
+        fr.style.display = 'block';
+        ar.style.display = 'none';
+        arNames.style.display = 'none';
+        enNames.style.display = 'block';
+        button.textContent = 'العربية';
+        document.documentElement.lang = 'fr';
+      } else {
+        fr.style.display = 'none';
+        ar.style.display = 'block';
+        arNames.style.display = 'block';
+        enNames.style.display = 'none';
+        button.textContent = 'Français';
+        document.documentElement.lang = 'ar';
+      }
+    }
+  </script>
 </body>
 </html>
