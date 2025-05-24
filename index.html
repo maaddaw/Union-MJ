@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahdi & Jihene - Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Playfair+Display:wght@400;500&family=Amiri&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --vh: 1vh;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: calc(var(--vh, 1vh) * 100);
+      background: linear-gradient(135deg, #fff6f9, #fdf7f3, #fffefb);
+      font-family: 'Playfair Display', serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      z-index: -1;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 215, 250, 0.4) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: sparkleMove 80s linear infinite;
+      opacity: 0.3;
+    }
+
+    body::after {
+      background-image: radial-gradient(circle, rgba(255, 245, 230, 0.5) 1px, transparent 1px);
+      animation-direction: reverse;
+    }
+
+    @keyframes sparkleMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-80px, -80px); }
+    }
+
+    .card-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .card-container {
+      perspective: 1500px;
+      transform-origin: center center;
+    }
+
+    .card-container.zoom-in {
+      animation: zoomIn 5s forwards;
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.5s ease-out both;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      width: min(90vw, 360px);
+      height: calc(var(--vh, 1vh) * 100);
+      max-height: 520px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+      transform-origin: center center;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      background: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      overflow: visible;
+    }
+
+    .front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 14px;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      text-align: center;
+    }
+
+    .language-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      user-select: none;
+    }
+
+    .language-toggle:hover {
+      background-color: #f0e6e6;
+    }
+
+    .message {
+      text-align: center;
+      max-width: 290px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .names {
+      font-size: 32px;
+      color: #b48a78;
+      margin-bottom: 12px;
+    }
+
+    .ampersand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      margin: 0 8px;
+    }
+
+    .message hr {
+      border: none;
+      border-top: 1px solid #e4cfc1;
+      margin: 10px auto 20px;
+      width: 60%;
+    }
+
+    .message .body-text {
+      font-size: clamp(14px, 2.2vw, 16px);
+      line-height: 1.5;
+      color: #333;
+      overflow-wrap: break-word;
+    }
+
+    #arabic-text {
+      direction: rtl;
+      text-align: right;
+      font-family: 'Amiri', serif;
+    }
+  </style>
+</head>
+<body>
+  <button class="language-toggle" onclick="toggleLanguage()">العربية</button>
+
+  <div class="card-wrapper">
+    <div class="card-container zoom-in fade-in-up" id="card-container">
+      <div class="card" id="card">
+        <div class="front">
+          <img src="cover.png" alt="Save the date" />
+        </div>
+        <div class="back">
+          <div class="message">
+            <p class="names">Mahdi <span class="ampersand">&</span> Jihene</p>
+            <hr />
+            <div id="french-text" class="body-text lang">
+              Nos cœurs débordent d’émotion,<br>
+              et ce moment précieux ne serait complet sans vous.<br><br>
+              Nous serions honorés de vous avoir à nos côtés<br>
+              le <strong>11 juin 2025 </strong>à<strong> 17h30</strong><br>
+              au <strong>Secret Garden – Dar Bouraoui, Carthage</strong>,<br><br>
+              pour célébrer l’union de nos vies.<br><br>
+              <em>Votre présence est le plus beau des cadeaux.</em>
+            </div>
+
+            <div id="arabic-text" class="body-text lang" style="display: none;">
+              قلوبنا تغمرها المشاعر،<br>
+              ولن يكتمل هذا اللحظة الثمينة بدونكم.<br><br>
+              يسعدنا حضوركم ومشاركتكم فرحتنا<br>
+              يوم <strong>11 جوان 2025</strong> على الساعة <strong>17:30</strong><br>
+              في <strong>Secret Garden – Dar Bouraoui, قرطاج</strong><br><br>
+              للاحتفال باتحاد حياتينا.<br><br>
+              <em>وجودكم هو أجمل هدية.</em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Set --vh dynamically for mobile support
+    function setVhUnit() {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    }
+    setVhUnit();
+    window.addEventListener('resize', setVhUnit);
+
+    // Flip logic
+    const container = document.getElementById('card-container');
+    const card = document.getElementById('card');
+
+    setTimeout(() => {
+      container.classList.remove('zoom-in');
+      card.classList.add('flipped');
+    }, 5000);
+
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+
+    card.addEventListener('mouseover', () => {
+      card.classList.remove('flipped');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.add('flipped');
+    });
+
+    // Language toggle
+    function toggleLanguage() {
+      const fr = document.getElementById('french-text');
+      const ar = document.getElementById('arabic-text');
+      const button = document.querySelector('.language-toggle');
+
+      if (fr.style.display === 'none') {
+        fr.style.display = 'block';
+        ar.style.display = 'none';
+        button.textContent = 'العربية';
+        document.documentElement.lang = 'fr';
+      } else {
+        fr.style.display = 'none';
+        ar.style.display = 'block';
+        button.textContent = 'Français';
+        document.documentElement.lang = 'ar';
+      }
+    }
+  </script>
+</body>
+</html>
