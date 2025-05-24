@@ -2,15 +2,6 @@
   --vh: 1vh;
 }
 
-/* Better to set the --vh value using JavaScript on resize for mobile fix */
-/* Example JS:
-   function setVh() {
-     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-   }
-   window.addEventListener('resize', setVh);
-   setVh();
-*/
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
